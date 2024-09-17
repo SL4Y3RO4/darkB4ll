@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    
+        <title>darkB4ll</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="assets/Bball.ico">
+        <meta name="keywords" content="darkB4ll">
+        <meta name="description" content="flick and reaction game white variant">
+        <meta name="Author" content="sl4y3r"> 
+        </head>
+        
+    <body>
+
+
+    <audio id="soundo">
+    <source src="8Bit2.ogg" type="audio/ogg">
+    </audio>
+    
+    <audio id="soundo2">
+    <source src="Bell3.ogg" type="audio/ogg">
+    </audio>
+
+    <div id="time"></div>
+    
+    <div id="cursor"></div>
+ 
+    <button id="change_size" onclick="changeSize()">change size</button>
+    
+    <div id="salve" onclick="soundi2()">
+    
+    <button id="btn" onclick="start_game()">start game</button>
+    
+    </div>
+    
+
+    <div id="sound2" onmouseover="soundi()">
+        
+     <div id="hey" onmouseover="punteggio()">
+
+     <div id="target" onmouseover="hovera()">0</div>
+
+    
+    </div>
+    </div>
+
+    <h1 id="sec">sec: 0</h1>
+    <h1 id="score">score: 0</h1>
+    <h1 id="text"></h1>
+
+
+   <script type="text/javascript">
+
+   //global variables setup
+
+   let i;
+   let i2;
+   let i3;
+   let g;
+   let time;
+   let s;
+   let x;
+   let y;
+   let point = 0;
+   let touch;
+   let score;
+   let point2 = 0;
+   let text;
+   let cursor;
+
+
+   window.onload = function() { 
+
+   i3 = document.getElementById('target');
+
+   x = (Math.random() * 300) + 1;
+   y = (Math.random() * 300) + 1;
+ 
+   i3.style.left = x + "px";
+   i3.style.top = y + "px";
+
+   }
+
+
+   function hovera() {
+
+   i = document.getElementById('target');
+
+   x = (Math.random() * 300) + 1;
+   y = (Math.random() * 300) + 1;
+
+  
+   i.style.left = x + "px";
+   i.style.top = y + "px";
+
+   i.innerHTML = point2;
+   point2++;
+
+   
+   }
+   
+    function start_game() { 
+    
+     
+    let k = document.getElementById('btn');
+    let u = document.getElementById('change_size');
+    
+    if(k.style.display == "none" && u.style.display == "none") {
+    
+    k.style.display = "block";
+    u.style.display = "block";
+    
+    } else {
+    
+    k.style.display = "none";
+    u.style.display = "none";
+    
+    }
+    
+    s = 0;
+    time = setInterval(() => {
+    g = document.getElementById('sec');
+    g.innerHTML = "sec: " + s;
+    s++;
+
+    if(s == 31) {
+
+        text = document.getElementById('text');
+        text.innerHTML = "Game Over";
+        clearInterval(time);
+        target.remove();
+
+    }
+    
+    },1000);
+    
+    }
+   
+
+
+    function soundi() { 
+
+      let sound = document.getElementById('soundo');
+      sound.play();
+
+    }
+    
+    function soundi2() { 
+
+      let sound = document.getElementById('soundo2');
+      sound.play();
+
+    }
+
+    
+    function punteggio() {
+
+    score = document.getElementById('score');
+    score.innerHTML = "score: " + point;
+    point++;
+
+    }
+
+    i2 = document.getElementById('cursor');        //cursor script 
+
+    document.addEventListener('mousemove', yeah);
+    
+    function yeah(e) {
+
+    let y = e.clientY;
+    let x = e.clientX;
+
+    i2.style.left = x + "px";
+    i2.style.top = y + "px";
+  
+    }
+ 
+    function changeSize() {
+    
+    cursor = document.getElementById('cursor');
+    
+    if(cursor.style.height < "70px" &&  cursor.style.width < "70px" ) {
+    
+    cursor.style.height = "70px";
+    cursor.style.width = "70px";
+    
+    } else {
+    
+    cursor.style.height = "30px";
+    cursor.style.width = "30px";
+    
+    }
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if(event.key == 'r') {
+            window.location.reload();
+        }
+
+        if(event.key == ' ') {
+            start_game();
+        }
+    })
+       
+   </script>
+
+    </body>
+
+</html>
+
+<style>
+
+* {
+   cursor:none;
+}
+
+body {
+    
+    padding:0;
+    margin:0;
+
+}
+
+#btn {
+
+position:absolute;
+left:48%;
+
+}
+
+#change_size {
+
+position:absolute;
+left:84%;
+border:1px solid black;
+
+}
+
+#text {
+
+   position:absolute;
+   left:45.5%;
+   top:13%;
+
+}
+
+#target {
+
+ height:60px;
+ width:90px;
+ border:1px solid black;
+ background: black;
+ position:absolute;
+ border-radius:45px;
+ text-align:center;
+ color:white;
+ font-size:30px;
+ padding-top:30px;
+ display:fixed;
+ 
+}
+
+#cursor {
+
+ height:30px;
+ width:30px;
+ border:1px solid cyan;
+ background: cyan;
+ position:absolute;
+ border-radius:40px;
+ transform:translate(-50%,-50%);
+ z-index:1;
+ pointer-events:none;
+
+}
+
+#score {
+
+    position:absolute;
+    left:46%;
+    top:6%;
+
+}
+
+#sec {
+
+position:absolute;
+left:25%;
+
+}
+
+#hey {
+
+    position:absolute;
+    left:45%;
+    top:45%;
+
+}
+
+</style>
